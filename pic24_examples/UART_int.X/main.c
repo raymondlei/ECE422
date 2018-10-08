@@ -45,19 +45,30 @@
 /**
   Section: Included Files
 */
-#include "mcc_generated_files/system.h"
+#include <stdint.h>
+#include <stdbool.h>
 
+#include "mcc_generated_files/system.h"
+#include "mcc_generated_files/uart1.h"
 /*
                          Main application
  */
 int main(void)
 {
+    uint8_t rx_ch;
+    
     // initialize the device
     SYSTEM_Initialize();
 
+    UART1_Write('a');
     while (1)
     {
         // Add your application code
+        if(UART1_ReceiveBufferIsEmpty() == false)
+        {
+            rx_ch = UART1_Read();
+            UART1_Write(rx_ch);
+        }
     }
 
     return 1;
