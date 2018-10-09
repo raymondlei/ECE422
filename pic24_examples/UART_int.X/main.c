@@ -67,6 +67,10 @@ int main(void)
         if(UART1_ReceiveBufferIsEmpty() == false)
         {
             rx_ch = UART1_Read();
+            
+            
+            
+            
             UART1_Write(rx_ch);
         }
     }
